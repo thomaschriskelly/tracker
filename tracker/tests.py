@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 import datetime
 from . import models
 
@@ -11,6 +11,7 @@ class ProductTestCase(TestCase):
         ''' test that __str()__ uses description field '''
         product = models.Product.objects.get()
         self.assertEqual(product.__str__(), self.description)
+
 
 class BreadcrumbTestCase(TestCase):
     def setUp(self):
@@ -38,3 +39,25 @@ class BreadcrumbTestCase(TestCase):
             breadcrumb.__str__(),
             expected
         )
+
+
+class ViewsTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def testIndex(self):
+        '''
+        verifies that web app index loads
+        '''
+        index_response = self.client.get('/')
+        self.assertEqual(index_response.status_code, 200)
+
+    def testPostProduct(self):
+        '''
+        tests POSTing a product creates new db entry
+        '''
+        self.assertEqual(models.Product.objects.all().count(), 0)
+        response = self.client.post('/products/', {'description': 'hello world'})
+        self.assertEqual(models.Product.objects.all().count(), 1)
+        self.assertEqual(models.Product.objects.get().description, 'hello world')
+
