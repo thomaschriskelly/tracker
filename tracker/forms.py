@@ -1,5 +1,4 @@
 from django import forms
-from . import models
 
 class ProductForm(forms.Form):
     description = forms.CharField(max_length=32)

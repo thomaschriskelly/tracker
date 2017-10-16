@@ -5,6 +5,7 @@ from . import models
 from . import forms
 
 def index(request):
+    ''' the index of this web application '''
     context = {
         'products': models.Product.objects.all(),
         'product_form': forms.ProductForm(),
@@ -12,6 +13,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 def product(request):
+    ''' provides the ability to create a new Product resource '''
     if request.method == 'POST':
         form = forms.ProductForm(request.POST)
         if form.is_valid():
@@ -19,6 +21,12 @@ def product(request):
             return HttpResponseRedirect('/')
 
 def locations(request, product_id):
+    '''
+    view or create a location resource
+    note that what users consider a location is
+    a breadcrumb in the database, implying that we
+    store more than just a location
+    '''
     if request.method == 'GET':
         product = models.Product.objects.get(id=product_id)
         context = {
@@ -35,13 +43,15 @@ def locations(request, product_id):
             return HttpResponseRedirect(redirect_url)
 
 def location(request, location_id):
+    '''
+    view to delete a location resource '''
     if request.method == 'DELETE':
         to_delete = models.Breadcrumb.objects.get(id=location_id)
-        redirect_url = reverse('locations', args=(to_delete.product.id,))
         to_delete.delete()
         return HttpResponse('Success')
 
 def export(request):
+    ''' simple view for exporting data '''
     context = {
         'breadcrumbs': models.Breadcrumb.objects.all()
     }
