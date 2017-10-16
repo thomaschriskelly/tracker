@@ -3,6 +3,9 @@
     <link rel="stylesheet" type="text/css" href="/static/tracker.css">
 </head>
 <body>
+    <script>
+        let csrfToken = '{{ csrf_token }}';
+    </script>
     <h2>Product Tracker</h2> {% block header %}{% endblock %}
     <hr>
     {% block content %}

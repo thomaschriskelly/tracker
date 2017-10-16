@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded",function(){
     let deleteButtons = document.getElementsByClassName('delete');
-    let headers = {"X-CSRFToken": '{{ csrf_token }}'};
+    let headers = {"X-CSRFToken": csrfToken};
     let fetchOptions = {method: 'DELETE', credentials: 'same-origin', headers: headers};
     for ( let btn of deleteButtons ) {
         btn.onclick = function() {
