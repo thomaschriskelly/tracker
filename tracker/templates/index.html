@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+Choose a product
+<ul>
+{% for product in products %}
+    <li><a href='{% url 'locations' product.id %}'>{{ product.description }}</a></li>
+{% endfor %}
+</ul>
+<br>
+<hr>
+<br>
+Add a new product
+<br>
+<form action='{% url 'product' %}' method='post'>
+    {% csrf_token %}
+    {{ product_form.as_p }}
+    <input type="submit" value='Submit'>
+</form>
+<br>
+<hr>
+<br>
+<a href='{% url 'export' %}'>Export all data</a>
+{% endblock %}

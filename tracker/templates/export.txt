@@ -1,0 +1,17 @@
+id&emsp;
+description&emsp;
+datetime&emsp;
+longitude&emsp;
+latitude&emsp;
+elevation&emsp;
+<br>
+{% for breadcrumb in breadcrumbs %}
+    {{ breadcrumb.product.id }}&emsp;
+    {{ breadcrumb.product.description }}&emsp;
+    {{ breadcrumb.datetime.isoformat }}&emsp;
+    {{ breadcrumb.longitude }}&emsp;
+    {{ breadcrumb.latitude }}&emsp;
+    {{ breadcrumb.elevation }}
+    <br>
+{% endfor %}
+
