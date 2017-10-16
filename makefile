@@ -1,6 +1,9 @@
 run:
 	python manage.py runserver
 
+static:
+	python manage.py collectstatic
+
 db:
 	python manage.py migrate
 	python manage.py loaddata tracker/fixtures/fixture.json

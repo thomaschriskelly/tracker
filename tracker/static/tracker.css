@@ -1,0 +1,17 @@
+body{
+    font-family: sans-serif;
+    color: #333333;
+}
+table{
+    width: 100%;
+}
+th{
+    text-align: left;
+}
+tr:hover{
+    background-color: #EEEEEE;
+}
+.delete:hover{
+    color: red;
+    cursor: pointer;
+}
